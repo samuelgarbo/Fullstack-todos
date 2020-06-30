@@ -3,7 +3,7 @@ app = express(),
 compression = require('compression'),
 helmet = require('helmet'),
 bodyParser = require('body-parser'),
-const path = require('path');
+path = require('path');
 
 const PORT =  process.env.PORT || 3001;
 

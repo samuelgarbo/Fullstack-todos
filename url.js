@@ -1,0 +1,1 @@
+export const DB_URL = 'mongodb+srv://root:root@cluster0-uhuud.azure.mongodb.net/todo-api?retryWrites=true&w=majority'
