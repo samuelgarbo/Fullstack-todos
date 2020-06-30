@@ -1,15 +1,17 @@
-import {v4 as uuid} from 'uuid';
+import axios from 'axios'
 
 const reducer = (state, action) => {
-    switch (action.type) {      
-        case 'ADD':
-            return [...state, { id: uuid(), task: action.task, completed: false }]
+    switch (action.type) {     
+        case 'LOAD_TODOS':
+            return action.payload; 
+        case 'ADD':            
+            return [...state,  action.payload ]
         case 'REMOVE':
-            return state.filter(todo => todo.id !== action.id)
+            return state.filter(todo => todo._id !== action._id)
         case 'TOGGLE':
-            return state.map(todo => todo.id === action.id ? {...todo, completed: !todo.completed } : todo)
+            return state.map(todo => todo._id === action._id ? {...todo, completed: !todo.completed } : todo)
         case 'EDIT':
-            return state.map(todo => todo.id === action.id ? {...todo, task: action.newTask} : todo)
+            return state.map(todo => todo._id === action._id ? {...todo, task: action.newTask} : todo)
         default:
             return state
     }

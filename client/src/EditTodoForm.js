@@ -2,17 +2,20 @@ import React, { useContext } from 'react';
 import TextField from '@material-ui/core/TextField';
 import useInputState from './hooks/useInputState';
 import { DispatchContext } from './context/TodosContext';
+import axios from 'axios';
 
 
 function EditTodoForm(props) {
-    const {id, toggle, task} = props;
+    const {_id, toggle, task} = props;
     const [value, handleChange, reset] = useInputState(task);
     const dispatch = useContext(DispatchContext);
     const handleEditTodo = (evt) => {
         evt.preventDefault()
-        dispatch({type: 'EDIT', id: id, newTask: value});
-        reset();
-        toggle()
+        axios.put(`/api/todos/${_id}`, {task: value})
+        .then(res => dispatch({type: 'EDIT', _id: res.data._id, newTask: res.data.task}))
+        .then(()=>toggle())
+        // reset();
+        // toggle()
     }
     return (        
         <form onSubmit={handleEditTodo} style={{marginLeft: '1rem'}}>

@@ -13,7 +13,7 @@ function TodoList(props) {
             <Paper>
                 <List>
                     {todos.map((todo, idx) =>
-                        <div key={todo.id}>
+                        <div key={todo._id}>
                             <Todo todo={todo} />
                             {idx < todo.length - 1 && <Divider />}
                         </div>
